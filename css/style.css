@@ -1,0 +1,64 @@
+/* =====================
+   VARIABLES
+===================== */
+:root {
+  --color-primario: #0059b3;
+  --color-secundario: #f5f5f5;
+  --color-texto: #333;
+  --fuente-base: "Poppins", sans-serif;
+}
+
+/* =====================
+   RESET + BASE
+===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--fuente-base);
+  color: var(--color-texto);
+  background-color: var(--color-secundario);
+}
+
+/* =====================
+   LAYOUT
+===================== */
+header, footer {
+  background-color: var(--color-primario);
+  color: #fff;
+  /*padding: 1rem;*/
+  text-align:left;
+}
+
+main {
+  padding: 2rem;
+  min-height: 70vh;
+}
+
+/* =====================
+   MENÚ
+===================== */
+/*nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+nav a.active {
+  font-weight: bold;
+  border-bottom: 2px solid #fff;
+}
+*/
