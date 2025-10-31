@@ -26,12 +26,12 @@ body {
 /* =====================
    LAYOUT
 ===================== */
-header, footer {
+/*header, footer {
   background-color: var(--color-primario);
   color: #fff;
-  /*padding: 1rem;*/
+  padding: 1rem;
   text-align:left;
-}
+}*/
 
 main {
   padding: 2rem;
