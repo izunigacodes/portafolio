@@ -6,18 +6,109 @@
   <title>Mi Plantilla Base</title>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/components.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="js/main.js" defer></script>
-  <script src="js/config.js" defer></script>
+ <script src="js/menu.js" defer></script>
 
   
 </head>
 <body>
-  <div id="header"></div>
+  <header>
+  <div class="container header-container">
+            <div class="logo">Israel Dev</div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="components/template-site.html">Diseño Web</a></li>
+                    <li><a href="#">Portfolio</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Elementos</a></li>
+                    <li><a href="#">Documentos</a></li>
+                </ul>
+            </nav>
+        </div>
+</header>
+<section class="about">
+        <div class="container">
+            <h2 class="section-title">NOSOTROS</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>resolver problemas con claridad, sencillez y honestidad.</h2>
+                    <p>¡Hola! Soy Israel Zuñiga, desarrollador de software especializado en crear sitios web profesionales, rápidos y fáciles de administrar. Ayudo a emprendedores, empresas y profesionales a construir su presencia digital con herramientas modernas y confiables.
+                        Si estás buscando una página web para tu negocio, una aplicación móvil o automatizar tus procesos, estás en el lugar correcto.</p>
+                    <p>Diseñamos webs modernas, rápidas y atractivas que convierten visitantes en clientes para tu negocio.</p>
+                    <a href="#" class="btn">VER MIS SERVICIOS</a>
+                </div>
+                <div class="about-image">
+                    <!-- Imagen de placeholder -->
+                     <img src="assets/img/nosotros.png" width="565" />
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <main id="content"></main>
-
-  <div id="footer"></div>
+    <!-- Services section -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">SERVICIOS</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Desarrollo</h3>
+                    <p>Automatización para recolección de datos del mercado. Backups automáticos de información crítica.</p>
+                    <a href="#" class="service-link">Leer más <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-pencil-ruler"></i>
+                    </div>
+                    <h3>Diseño Web</h3>
+                    <p>Diseño y vendo <strong>plantillas web personalizables</strong> listas para usar. Ideales para <strong>Hoteles, Librerías y Talleres Mecánicos</strong>.</p>
+                    <a href="#" class="service-link">Leer más <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Diseño Interacción</h3>
+                    <p>Desarrollo apps con <strong>React Native</strong> y <strong>Expo Go</strong>, integrando funciones avanzadas como 
+    <strong>Google Maps</strong> y notificaciones.</p>
+                    <a href="#" class="service-link">Leer más <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Diseño Visual</h3>
+                    <p>Creación y mantenimiento de sitios web profesionales con <strong>PHP, Laravel, MySQL, HTML, CSS y JavaScript</strong>.  </p>
+                    <a href="#" class="service-link">Leer más <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3>Gestión de proyectos</h3>
+                    <p>Te ayudo a subir tu sitio a servicios como <strong>Hostinger</strong> y gestionar la compra de tu dominio.</p>
+                    <a href="#" class="service-link">Leer más <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3>Animación</h3>
+                    <p>Ofrezco soluciones completas para tu presencia digital, desde la programación hasta la publicación en línea.</p>
+                    <a href="#" class="service-link">Leer más <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
+
 
 </html>

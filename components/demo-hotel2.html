@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bellevue Hotel - El Hotel Más Lujoso de la Ciudad</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables y estilos generales */
+        :root {
+            --primary-color: #8B7355;
+            --secondary-color: #333;
+            --light-color: #f8f8f8;
+            --dark-color: #222;
+            --text-color: #333;
+            --light-text: #fff;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #7a6345;
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            color: var(--secondary-color);
+        }
+
+        /* Header y navegación */
+        header {
+            background-color: var(--light-color);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/img/manuel.jpg');
+            background-size: cover;
+            background-position: center;
+            color: var(--light-text);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        /* Search form */
+        .search-form {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--text-color);
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 1000px;
+            margin: -80px auto 0;
+            position: relative;
+            z-index: 10;
+            box-shadow: var(--shadow);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-btn {
+            align-self: flex-end;
+        }
+
+        /* Features section */
+        .features {
+            padding: 100px 0 60px;
+            background-color: var(--light-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        /* About section */
+        .about {
+            padding: 80px 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+        }
+
+        .about-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Rooms section */
+        .rooms {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .room-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .room-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .room-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .room-card:hover .room-image img {
+            transform: scale(1.1);
+        }
+
+        .room-info {
+            padding: 20px;
+        }
+
+        .room-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .room-price {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .room-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .room-features li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .room-features i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        /* Services section */
+        .services {
+            padding: 80px 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .service-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .service-item h3 {
+            margin-bottom: 10px;
+        }
+
+        /* Nearby section */
+        .nearby {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+
+        .nearby-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .nearby-item {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .nearby-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .nearby-item h3 {
+            margin-bottom: 10px;
+        }
+
+        /* Reviews section */
+        .reviews {
+            padding: 80px 0;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .review-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .review-stars {
+            color: #FFD700;
+            margin-bottom: 15px;
+        }
+
+        .review-text {
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--light-text);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--light-color);
+                box-shadow: var(--shadow);
+                padding: 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .search-form {
+                margin-top: -40px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-btn {
+                align-self: stretch;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 80px 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .features, .about, .rooms, .services, .nearby, .reviews {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">BELLEVUE</div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Pages</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#" class="btn">BOOK YOUR STAY</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>EL HOTEL MÁS LUJOSO DE LA CIUDAD</h1>
+            <p>Nuestras lujosas instalaciones y servicio impecable seguramente harán que su estancia sea inolvidable.</p>
+            <a href="#" class="btn">RESERVAR AHORA</a>
+        </div>
+    </section>
+
+    <!-- Search Form -->
+    <section class="container">
+        <div class="search-form">
+            <h2 style="margin-bottom: 20px; text-align: center;">BUSCAR DISPONIBILIDAD</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="checkin">Fecha de entrada</label>
+                    <input type="date" id="checkin">
+                </div>
+                <div class="form-group">
+                    <label for="checkout">Fecha de salida</label>
+                    <input type="date" id="checkout">
+                </div>
+                <div class="form-group">
+                    <label for="adults">Adultos</label>
+                    <select id="adults">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="children">Niños</label>
+                    <select id="children">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <div class="form-group form-btn">
+                    <button class="btn" style="width: 100%;">BUSCAR</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-couch"></i>
+                    </div>
+                    <h3>Decoración Elegante</h3>
+                    <p>Ya sea que se quede por negocios o placer, nuestro hotel proporciona un oasis de lo cotidiano.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-concierge-bell"></i>
+                    </div>
+                    <h3>Servicio Impecable</h3>
+                    <p>Nuestros restaurantes ofrecen cocina del más alto nivel: menús rusos, europeos, barbacoa y delicias culinarias.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>Spa Rejuvenecedor</h3>
+                    <p>El spa del hotel es un lugar lujoso para relajarse y rejuvenecer. Ofrece una variedad de servicios.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-glass-cheers"></i>
+                    </div>
+                    <h3>Salones para Eventos</h3>
+                    <p>El salón de eventos del hotel es el lugar perfecto para organizar su próximo evento.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <h2 class="section-title">NUESTRO HOTEL</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Una estancia inolvidable</h2>
+                    <p>Nuestro elegante hotel cuenta con habitaciones espaciosas con decoración elegante y todas las comodidades que necesita para sentirse como en casa. Disfrute de una deliciosa comida en nuestro elegante restaurante o relájese en nuestro lujoso spa.</p>
+                    <p>Nuestro hotel es la opción perfecta para viajeros de negocios o de ocio. Esperamos darle la bienvenida pronto.</p>
+                    <a href="#" class="btn">Leer más <i class="fas fa-chevron-right"></i></a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Interior del hotel">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section class="rooms">
+        <div class="container">
+            <h2 class="section-title">HABITACIONES Y SUITES</h2>
+            <div class="rooms-grid">
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Ambassador Suite">
+                    </div>
+                    <div class="room-info">
+                        <h3>AMBASSADOR SUITE</h3>
+                        <div class="room-price">$399/noche</div>
+                        <ul class="room-features">
+                            <li><i class="fas fa-check"></i> Baño privado</li>
+                            <li><i class="fas fa-check"></i> Dormitorio y sala de estar separados</li>
+                            <li><i class="fas fa-check"></i> Amenidades de última generación</li>
+                        </ul>
+                        <a href="#" class="btn" style="width: 100%; text-align: center;">CONSULTAR DISPONIBILIDAD</a>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Royal Suite">
+                    </div>
+                    <div class="room-info">
+                        <h3>ROYAL SUITE</h3>
+                        <div class="room-price">$299/noche</div>
+                        <ul class="room-features">
+                            <li><i class="fas fa-check"></i> Dormitorio, sala de estar y comedor</li>
+                            <li><i class="fas fa-check"></i> Baño privado</li>
+                            <li><i class="fas fa-check"></i> Mobiliario lujoso</li>
+                        </ul>
+                        <a href="#" class="btn" style="width: 100%; text-align: center;">CONSULTAR DISPONIBILIDAD</a>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Presidential Suite">
+                    </div>
+                    <div class="room-info">
+                        <h3>PRESIDENTIAL SUITE</h3>
+                        <div class="room-price">$499/noche</div>
+                        <ul class="room-features">
+                            <li><i class="fas fa-check"></i> Dormitorio, sala de estar y comedor separados</li>
+                            <li><i class="fas fa-check"></i> Cocina y múltiples baños</li>
+                            <li><i class="fas fa-check"></i> La suite más lujosa y cara</li>
+                        </ul>
+                        <a href="#" class="btn" style="width: 100%; text-align: center;">CONSULTAR DISPONIBILIDAD</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">A SU SERVICIO</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Llamada de despertador</h3>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-umbrella-beach"></i>
+                    </div>
+                    <h3>Frente a la playa</h3>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3>Reserva online</h3>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Múltiples ubicaciones</h3>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Mejor calificado</h3>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-shuttle-van"></i>
+                    </div>
+                    <h3>Servicio de transporte</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nearby Section -->
+    <section class="nearby">
+        <div class="container">
+            <h2 class="section-title">QUÉ HAY CERCA</h2>
+            <div class="nearby-grid">
+                <div class="nearby-item">
+                    <div class="nearby-icon">
+                        <i class="fas fa-binoculars"></i>
+                    </div>
+                    <h3>Turismo</h3>
+                    <p>Visite la Estatua de la Libertad, viaje en el Ferry de Staten Island.</p>
+                </div>
+                <div class="nearby-item">
+                    <div class="nearby-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Cenar fuera</h3>
+                    <p>Hay infinitas opciones para cenar fuera en Nueva York.</p>
+                </div>
+                <div class="nearby-item">
+                    <div class="nearby-icon">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <h3>Atracción de vida silvestre</h3>
+                    <p>Un lugar ideal para aprender y ver animales en sus hábitats naturales.</p>
+                </div>
+                <div class="nearby-item">
+                    <div class="nearby-icon">
+                        <i class="fas fa-dice"></i>
+                    </div>
+                    <h3>Casino</h3>
+                    <p>Ofrecen una variedad de juegos y oportunidades para ganar dinero.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews">
+        <div class="container">
+            <h2 class="section-title">RESEÑAS</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">¡El hotel fue increíble! La habitación era perfecta y muy limpia. El personal fue muy amable y servicial. ¡Definitivamente recomendaría este hotel a cualquiera y me quedaría aquí nuevamente sin dudarlo!</p>
+                    <p class="review-author">Marii Brown</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">El personal es amable y servicial, y las habitaciones son limpias y cómodas. El hotel está a poca distancia a pie de muchos restaurantes y tiendas, y está cerca de todo. Volveré.</p>
+                    <p class="review-author">Marii Brown</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">Me alojé por un viaje de negocios y fue una gran experiencia. La habitación estaba limpia y cómoda y el personal era amable y servicial. Definitivamente recomendaría este hotel a otros.</p>
+                    <p class="review-author">Marii Brown</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Sobre Nosotros</h3>
+                    <p>Nuestro hotel es un hotel libre de humo, apto para mascotas, con desayuno buffet caliente gratuito y WiFi gratis. Ofrecemos una variedad de habitaciones y suites, perfectas para viajeros de negocios y de ocio por igual.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Paquetes</a></li>
+                        <li><a href="#">Habitaciones</a></li>
+                        <li><a href="#">Listados</a></li>
+                        <li><a href="#">Sobre Nosotros</a></li>
+                        <li><a href="#">Menú</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contáctenos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <p>123 Avenida de Lujo<br>Ciudad, Estado 12345<br>Teléfono: (123) 456-7890<br>Email: info@bellevuehotel.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Privacidad y Política | Copyright. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
+

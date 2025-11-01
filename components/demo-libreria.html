@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <title>Librería El Saber</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+            /*font-family: "Roboto", sans-serif;*/
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        /* Estilos del header y menú */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: 0.6s;
+        }
+
+        header.sticky {
+            padding: 15px 100px;
+            background: #fff;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            color: #fff;
+            font-size: 2em;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 2px;
+            transition: 0.6s;
+        }
+
+        header.sticky .logo {
+            color: #333;
+        }
+
+        header ul {
+            position: relative;
+            display: flex;
+        }
+
+        header ul li {
+            list-style: none;
+        }
+
+        header ul li a {
+            position: relative;
+            margin: 0 15px;
+            text-decoration: none;
+            color: #fff;
+            letter-spacing: 2px;
+            font-weight: 500;
+            transition: 0.6s;
+        }
+
+        header.sticky ul li a {
+            color: #333;
+        }
+
+        /* Menú hamburguesa */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            color: #fff;
+            font-size: 1.5em;
+        }
+
+        header.sticky .menu-toggle {
+            color: #333;
+        }
+
+        /* Sección de portada */
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            /*background: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;*/
+            background: url('https://html.kodeforest.net/templates/books/store/images/banner-2.png') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .banner-content {
+            position: relative;
+            max-width: 900px;
+            text-align: center;
+            z-index: 1;
+            padding: 40px;
+            /*background: rgba(0, 0, 0, 0.6);*/
+            border-radius: 10px;
+            color: #fff;
+        }
+
+        .banner-content h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .banner-content p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        /* Sección de contenido */
+        .content {
+            padding: 100px;
+            background: #f9f9f9;
+        }
+
+        .content h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+        }
+
+        .content p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            header, header.sticky {
+                padding: 20px 50px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            header ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: #fff;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 50px;
+                transition: 0.5s;
+            }
+
+            header ul.active {
+                left: 0;
+            }
+
+            header ul li {
+                margin: 15px 0;
+            }
+
+            header ul li a {
+                color: #333;
+                font-size: 1.2em;
+            }
+
+            .content {
+                padding: 50px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header, header.sticky {
+                padding: 20px 20px;
+            }
+
+            .banner-content h2 {
+                font-size: 2em;
+            }
+
+            .banner-content p {
+                font-size: 1em;
+            }
+
+            .content {
+                padding: 30px;
+            }
+
+            .content h2 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <a href="#" class="logo">Librería El Saber</a>
+        <div class="menu-toggle">☰</div>
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Libros</a></li>
+            <li><a href="#">Autores</a></li>
+            <li><a href="#">Eventos</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+    </header>
+
+    <section class="banner">
+        <div class="banner-content">
+            <h2>Bienvenidos a Librería El Saber</h2>
+            <p>Descubre un mundo de conocimiento, imaginación y aventuras entre las páginas de nuestros libros. Desde clásicos atemporales hasta las últimas novedades, tenemos algo para cada lector.</p>
+        </div>
+    </section>
+
+    <section class="content">
+        <h2>Sobre Nosotros</h2>
+        <p>Librería El Saber es un espacio dedicado a la promoción de la lectura y la cultura. Fundada en 1995, hemos servido a nuestra comunidad con pasión por los libros y compromiso con el conocimiento. Nuestro objetivo es conectar a los lectores con las historias que transforman vidas.</p>
+        <p>Contamos con una amplia selección de géneros que incluye ficción, no ficción, poesía, ciencia, historia, arte y literatura infantil. Además, organizamos regularmente eventos como presentaciones de libros, clubes de lectura y talleres de escritura.</p>
+        <p>Nuestro equipo está formado por ávidos lectores que están siempre dispuestos a recomendar el libro perfecto para cada persona. Creemos firmemente que cada libro tiene el poder de cambiar perspectivas y enriquecer vidas.</p>
+    </section>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        });
+
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navigation = document.querySelector('header ul');
+
+        menuToggle.addEventListener('click', function() {
+            navigation.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        const navLinks = document.querySelectorAll('header ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navigation.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
