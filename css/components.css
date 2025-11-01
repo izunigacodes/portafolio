@@ -1,0 +1,96 @@
+/* ===========================
+   SECCIÓN HERO
+=========================== */
+.hero-seccion {
+  position: relative;
+  width: 100%;
+  overflow: visible; /* permite que la tarjeta sobresalga */
+}
+
+/* Fondo con imagen */
+
+
+.hero-fondo-ser {
+  background-image: url("https://cursor.ninetheme.com/wp-content/uploads/2018/01/bg-8.jpg"); /* ← cambia por tu imagen */
+  background-size: cover;
+  background-position: center;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1; /* fondo detrás del texto, pero debajo de la tarjeta */
+}
+.hero-fondo-ser::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /*background: rgba(0, 0, 0, 0.4);*/
+  z-index: 1; /* sobre la imagen, debajo del texto */
+}
+
+.hero-fondo {
+  background-image: url("https://cursor.ninetheme.com/wp-content/uploads/2018/01/bg-10.jpg"); /* ← cambia por tu imagen */
+  background-size: cover;
+  background-position: center;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1; /* fondo detrás del texto, pero debajo de la tarjeta */
+}
+
+/* Capa semitransparente encima de la imagen */
+.hero-fondo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /*background: rgba(0, 0, 0, 0.4);*/
+  z-index: 1; /* sobre la imagen, debajo del texto */
+}
+
+/* Texto flotante */
+.hero-texto {
+  position: relative;
+  z-index: 2; /* encima de la capa oscura */
+  color: #000;
+  text-align: left;
+width: 75%; 
+  max-width: none;
+  padding: 1rem;
+}
+
+.hero-texto h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-texto p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* Tarjeta inferior */
+.info-card {
+  position: relative;
+  z-index: 3; /* ✅ asegúrate de que esté por encima del fondo */
+  background: #fff;
+  width: 90%;
+  max-width: 700px;
+  margin: -80px auto 2rem auto;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  text-align: left;
+}
+
+.info-card h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.info-card p {
+  color: #555;
+  line-height: 1.6;
+}
