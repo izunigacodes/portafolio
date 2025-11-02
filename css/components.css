@@ -103,3 +103,115 @@ width: 75%;
   color: #454545;
   font-size: 36px;
 } 
+
+/* 🎨 Estilos generales */
+.pricing-section {
+  padding: 80px 20px;
+  background: #f9fafb;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 50px;
+}
+
+/* 📦 Contenedor de las tarjetas */
+.pricing-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+/* 💳 Tarjeta individual */
+.pricing-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  padding: 30px 20px;
+  width: 300px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 2px solid transparent;
+}
+
+.pricing-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  border-color: #007bff;
+}
+
+/* ✨ Plan destacado */
+.pricing-card.featured {
+  background: linear-gradient(135deg, #007bff, #0056d2);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.pricing-card.featured h3,
+.pricing-card.featured .price,
+.pricing-card.featured ul li {
+  color: #fff;
+}
+
+/* 💲 Precio */
+.price {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 10px 0 20px;
+  color: #007bff;
+}
+
+.price span {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* 📋 Lista de beneficios */
+.pricing-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.pricing-card ul li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  color: #555;
+}
+
+/* 🔘 Botón */
+.btn {
+  display: inline-block;
+  background: #007bff;
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #0056d2;
+}
+
+/* 📱 Responsive */
+@media (max-width: 900px) {
+  .pricing-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pricing-card {
+    width: 90%;
+    max-width: 400px;
+  }
+}
