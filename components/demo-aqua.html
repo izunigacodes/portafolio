@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrusel de Imágenes con Texto Flotante</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #002C8F, #002C8F, #002C8F);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            
+
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        /* Estilos del menú */
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.1); /* Fondo transparente */
+            backdrop-filter: blur(10px); /* Efecto de desenfoque */
+            padding: 0px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Estilos del botón hamburguesa */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+        }
+
+        .hamburger .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        /* Contenido de ejemplo */
+        .content {
+            margin-top: 100px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        /* Media Queries para diseño responsive */
+        @media screen and (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: rgba(0, 0, 0, 0.9);
+                backdrop-filter: blur(10px);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 20px 0;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+        }
+
+        .bubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(173, 216, 230, 0.3);
+            border-radius: 50%;
+            animation: rise 10s infinite ease-in;
+        }
+        
+        .bubble:nth-child(1) {
+            width: 40px;
+            height: 40px;
+            left: 10%;
+            animation-duration: 8s;
+        }
+        
+        .bubble:nth-child(2) {
+            width: 20px;
+            height: 20px;
+            left: 20%;
+            animation-duration: 5s;
+            animation-delay: 1s;
+        }
+        
+        .bubble:nth-child(3) {
+            width: 50px;
+            height: 50px;
+            left: 35%;
+            animation-duration: 7s;
+            animation-delay: 2s;
+        }
+        
+        .bubble:nth-child(4) {
+            width: 80px;
+            height: 80px;
+            left: 50%;
+            animation-duration: 11s;
+            animation-delay: 0s;
+        }
+        
+        .bubble:nth-child(5) {
+            width: 35px;
+            height: 35px;
+            left: 55%;
+            animation-duration: 6s;
+            animation-delay: 1s;
+        }
+        
+        .bubble:nth-child(6) {
+            width: 45px;
+            height: 45px;
+            left: 65%;
+            animation-duration: 8s;
+            animation-delay: 3s;
+        }
+        
+        .bubble:nth-child(7) {
+            width: 25px;
+            height: 25px;
+            left: 75%;
+            animation-duration: 7s;
+            animation-delay: 2s;
+        }
+        
+        .bubble:nth-child(8) {
+            width: 80px;
+            height: 80px;
+            left: 80%;
+            animation-duration: 6s;
+            animation-delay: 1s;
+        }
+        
+        .bubble:nth-child(9) {
+            width: 15px;
+            height: 15px;
+            left: 70%;
+            animation-duration: 5s;
+            animation-delay: 1s;
+        }
+        
+        .bubble:nth-child(10) {
+            width: 50px;
+            height: 50px;
+            left: 85%;
+            animation-duration: 10s;
+            animation-delay: 4s;
+        }
+        
+        @keyframes rise {
+            0% {
+                bottom: -100px;
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(100px);
+            }
+            100% {
+                bottom: 1080px;
+                transform: translateX(-100px);
+            }
+        }
+
+
+        .carrusel {
+            width: 100%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.0);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+           
+            /*padding: 30px;*/
+            padding-top: 110px;
+            padding-left: 20px;
+            padding-right: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .slider-carrusel {
+            position: relative;
+            width: 100%;
+            height: 650px;
+            overflow: hidden;
+            
+            /*border-radius: 15px;*/
+             border-top-left-radius: 30px;
+            border-top-right-radius: 200px;
+            border-bottom-left-radius: 200px;
+            border-bottom-right-radius: 5px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .slider {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            transition: transform 0.8s ease-in-out;
+        }
+
+        .slide {
+            width: 33.333%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 60px;
+            left: 0;
+            right: 0;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            transition: all 0.5s ease;
+        }
+
+        .slide-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .slide-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            z-index: 10;
+        }
+
+        .nav-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+        }
+
+        .instructions {
+            text-align: center;
+            color: white;
+            margin-top: 25px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .customization {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            color: white;
+        }
+
+        .customization h3 {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .customization-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .custom-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .custom-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .slider-carrusel {
+                height: 400px;
+            }
+            
+            .slide-title {
+                font-size: 1.5rem;
+            }
+            
+            .slide-text {
+                font-size: 1rem;
+            }
+            
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slider-carrusel {
+                height: 300px;
+            }
+            
+            .slide-content {
+                padding: 15px;
+                bottom: 50px;
+            }
+            
+            .slide-title {
+                font-size: 1.2rem;
+            }
+            
+            .slide-text {
+                font-size: 0.9rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-weight: 100;
+            color: #21B6FF;
+        }
+        .about-image {
+            flex: 1;
+            /*background-color: #fff;*/
+            /*height: 400px;*/
+            
+            border-radius: 10px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            margin-top: 50px;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Testimonials section */
+        .testimonials {
+            padding: 80px 0;
+            /*background-color: #f9f9f9;*/
+        }
+
+        .testimonial {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 40px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-text {
+            font-size: 20px;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .testimonial-position {
+            color: #7f8c8d;
+        }
+
+        /* Blog section */
+        .blog {
+            padding: 80px 0;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background-color: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .blog-image {
+            height: 200px;
+            background-color: #ddd;
+        }
+
+        .blog-content {
+            padding: 20px;
+        }
+
+        .blog-meta {
+            display: flex;
+            margin-bottom: 15px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .blog-meta span {
+            margin-right: 15px;
+        }
+
+        .blog-card h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .blog-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .blog-link {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .blog-link i {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+
+        .blog-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #002C8F;
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #3498db;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #34495e;
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bubbles">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
+    <div class="carrusel">
+        <header>
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <img src="../assets/icons/mineral.png"  />
+            </a>
+            <ul class="nav-links">
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Servicios</a></li>
+                <li><a href="#">Portafolio</a></li>
+                <li><a href="#">Acerca de</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+            <button class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+        
+        <div class="slider-carrusel">
+            <div class="slider">
+                <!-- Slide 1 -->
+                <div class="slide">
+                    <img src="../assets/img/Agua1.jpg" alt="Playa tropical">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Paraíso Tropical</h2>
+                        <p class="slide-text">Disfruta de las playas más hermosas con aguas cristalinas y arenas blancas. El lugar perfecto para relajarte y desconectar.</p>
+                    </div>
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="slide">
+                    <img src="../assets/img/Agua2.jpg" alt="Montañas nevadas">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Aventura en la Montaña</h2>
+                        <p class="slide-text">Explora paisajes impresionantes y respira aire puro en nuestras excursiones guiadas por las montañas más altas.</p>
+                    </div>
+                </div>
+                
+                <!-- Slide 3 -->
+                <div class="slide">
+                    <img src="../assets/img/Agua3.jpg" alt="Ciudad moderna">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Ciudad Cosmopolita</h2>
+                        <p class="slide-text">Vive la experiencia urbana en una de las ciudades más vibrantes del mundo, con cultura, gastronomía y entretenimiento.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Controles de navegación -->
+            <div class="slider-controls">
+                <button class="control-btn prev-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="control-btn next-btn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <!-- Indicadores de navegación -->
+            <div class="slider-nav">
+                <div class="nav-dot active" data-slide="0"></div>
+                <div class="nav-dot" data-slide="1"></div>
+                <div class="nav-dot" data-slide="2"></div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="customization">
+            <section class="about">
+                <div class="container">
+                    <h2 class="section-title">NOSOTROS</h2>
+                    <div class="about-content">
+                        <div class="about-text">
+                            <h2>Nuestra empresa fue fundada en 1965.</h2>
+                            <p>Aquatiras es ideal para beber, cocinar, hacer deporte e incluso para niños. El producto cuenta con certificación en 12 países. ¡Hola! Soy Israel Zuñiga, desarrollador de software especializado en crear sitios web profesionales, rápidos y fáciles de administrar. Ayudo a emprendedores, empresas y profesionales a construir su presencia digital con herramientas modernas y confiables.
+                                Si estás buscando una página web para tu negocio, una aplicación móvil o automatizar tus procesos, estás en el lugar correcto.</p>
+                            <p>Diseñamos webs modernas, rápidas y atractivas que convierten visitantes en clientes para tu negocio.</p>
+                            <a href="#" class="btn">LEER MÁS</a>
+                        </div>
+                        <div >
+                            <!-- Imagen de placeholder -->
+                            <img class="about-image" width="500" src="../assets/img/Hotel2.jpg"  />
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="customization">
+            <!-- Testimonials section -->
+            <section class="testimonials">
+                <div class="container">
+                    <h2 class="section-title">TESTIMONIOS</h2>
+                    <div class="testimonial">
+                        <p class="testimonial-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo porta urna et maximus. Vivamus pretium magna pellentesque quam tempor efficitur vitae.</p>
+                        <div class="testimonial-author">Marilyn Suttle</div>
+                        <div class="testimonial-position">Head of Sales, Playing Inc.</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="customization">
+         <!-- Blog section -->
+    <section class="blog">
+        <div class="container">
+            <h2 class="section-title">BLOG CORPORATIVO</h2>
+            <p style="text-align: center; margin-bottom: 40px; color: #666;">Últimas publicaciones, manténgase al día</p>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <img width="100%" height="200" src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1158&q=80" alt="Art Exhibition">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>November 7, 2017</span>
+                            <span>4 Comments</span>
+                            <span>By XNT_ADM</span>
+                        </div>
+                        <h3>Consejos profesionales para ejecutivos introvertidos</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id est tortor. Aliquam erat volutpat.</p>
+                        <a href="#" class="blog-link">Leer más <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <img width="100%" height="200" src="https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Art Exhibition">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>November 7, 2017</span>
+                            <span>4 Comments</span>
+                            <span>By XNT_ADM</span>
+                        </div>
+                        <h3>Identidad Corporativa</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id est tortor. Aliquam erat volutpat.</p>
+                        <a href="#" class="blog-link">Leer más <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <img width="100%" height="200" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Art Exhibition">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>November 6, 2017</span>
+                            <span>3 Comments</span>
+                            <span>By XNT_ADM</span>
+                        </div>
+                        <h3>Esa oferta de trabajo que acabas de recibir de una agencia podría ser falsa</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id est tortor. Aliquam erat volutpat.</p>
+                        <a href="#" class="blog-link">Leer más <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">Acerca de</a></li>
+                        <li><a href="#">Clientes</a></li>
+                        <li><a href="#">Trabajos</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Desarrollo</a></li>
+                        <li><a href="#">Web & Móvil</a></li>
+                        <li><a href="#">Digital</a></li>
+                        <li><a href="#">Redes Sociales</a></li>
+                        <li><a href="#">Buscar</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Ayuda y soporte</h3>
+                    <ul>
+                        <li><a href="#">Centro de ayuda</a></li>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#">Términos de servicio</a></li>
+                        <li><a href="#">Política de privacidad</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Síganos</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 IsraelDev. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    </div>
+    
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Crear burbujas adicionales con JavaScript
+            const bubblesContainer = document.querySelector('.bubbles');
+            
+            for (let i = 0; i < 15; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                // Valores aleatorios para las burbujas
+                const size = Math.random() * 60 + 10;
+                const left = Math.random() * 100;
+                const duration = Math.random() * 10 + 5;
+                const delay = Math.random() * 5;
+                
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${left}%`;
+                bubble.style.animationDuration = `${duration}s`;
+                bubble.style.animationDelay = `${delay}s`;
+                
+                bubblesContainer.appendChild(bubble);
+            }
+            
+            // Interactividad para el botón
+            /*const actionBtn = document.getElementById('actionBtn');
+            actionBtn.addEventListener('click', function() {
+                alert('¡Las burbujas siguen subiendo!');
+            });*/
+        });
+
+
+        // Toggle del menú hamburguesa
+        const hamburger = document.querySelector(".hamburger");
+        const navLinks = document.querySelector(".nav-links");
+
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navLinks.classList.toggle("active");
+        });
+
+        // Cerrar menú al hacer clic en un enlace (en móviles)
+        document.querySelectorAll(".nav-links a").forEach(n => n.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navLinks.classList.remove("active");
+        }));
+
+        // Cambiar opacidad del navbar al hacer scroll
+        window.addEventListener("scroll", function() {
+            const header = document.querySelector("header");
+            if (window.scrollY > 50) {
+                header.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+            } else {
+                header.style.backgroundColor = "transparent";
+            }
+        });
+
+
+
+        // Elementos del DOM
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.nav-dot');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        /*const changeTextsBtn = document.getElementById('change-texts');
+        const toggleAutoBtn = document.getElementById('toggle-auto');
+        const changeSpeedBtn = document.getElementById('change-speed');*/
+        
+        // Variables de estado
+        let currentSlide = 0;
+        let autoPlay = true;
+        let slideInterval;
+        let slideSpeed = 5000; // 5 segundos
+        
+        // Función para cambiar de slide
+        function goToSlide(slideIndex) {
+            // Actualizar slide actual
+            currentSlide = slideIndex;
+            
+            // Mover el slider
+            slider.style.transform = `translateX(-${currentSlide * (100 / slides.length)}%)`;
+            
+            // Actualizar dots activos
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[currentSlide].classList.add('active');
+        }
+        
+        // Función para ir al siguiente slide
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            goToSlide(currentSlide);
+        }
+        
+        // Función para ir al slide anterior
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            goToSlide(currentSlide);
+        }
+        
+        // Iniciar autoplay
+        function startAutoPlay() {
+            if (autoPlay) {
+                slideInterval = setInterval(nextSlide, slideSpeed);
+            }
+        }
+        
+        // Detener autoplay
+        function stopAutoPlay() {
+            clearInterval(slideInterval);
+        }
+        
+        // Cambiar textos de ejemplo
+        function changeTexts() {
+            const titles = document.querySelectorAll('.slide-title');
+            const texts = document.querySelectorAll('.slide-text');
+            
+            // Nuevos títulos
+            const newTitles = [
+                "Aventura en la Naturaleza",
+                "Retiro de Bienestar",
+                "Exploración Cultural"
+            ];
+            
+            // Nuevos textos
+            const newTexts = [
+                "Sumérgete en la belleza natural con nuestras expediciones guiadas por expertos locales.",
+                "Renueva tu energía con nuestros programas de meditación y spa en entornos serenos.",
+                "Descubre tradiciones ancestrales y arte local en nuestros tours culturales exclusivos."
+            ];
+            
+            // Aplicar nuevos textos
+            titles.forEach((title, index) => {
+                title.textContent = newTitles[index];
+            });
+            
+            texts.forEach((text, index) => {
+                text.textContent = newTexts[index];
+            });
+        }
+        
+        // Cambiar velocidad del carrusel
+        function changeSpeed() {
+            if (slideSpeed === 5000) {
+                slideSpeed = 2000; // Cambiar a 2 segundos
+                changeSpeedBtn.textContent = "Velocidad Normal";
+            } else {
+                slideSpeed = 5000; // Volver a 5 segundos
+                changeSpeedBtn.textContent = "Velocidad Rápida";
+            }
+            
+            // Reiniciar autoplay con nueva velocidad
+            if (autoPlay) {
+                stopAutoPlay();
+                startAutoPlay();
+            }
+        }
+        
+        // Alternar autoplay
+        function toggleAutoPlay() {
+            autoPlay = !autoPlay;
+            
+            if (autoPlay) {
+                startAutoPlay();
+                toggleAutoBtn.textContent = "Pausar Auto";
+            } else {
+                stopAutoPlay();
+                toggleAutoBtn.textContent = "Reanudar Auto";
+            }
+        }
+        
+        // Event Listeners
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            if (autoPlay) {
+                stopAutoPlay();
+                startAutoPlay();
+            }
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            if (autoPlay) {
+                stopAutoPlay();
+                startAutoPlay();
+            }
+        });
+        
+        // Navegación por dots
+        dots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                const slideIndex = parseInt(this.getAttribute('data-slide'));
+                goToSlide(slideIndex);
+                
+                if (autoPlay) {
+                    stopAutoPlay();
+                    startAutoPlay();
+                }
+            });
+        });
+        
+        // Botones de personalización
+        /*changeTextsBtn.addEventListener('click', changeTexts);
+        toggleAutoBtn.addEventListener('click', toggleAutoPlay);
+        changeSpeedBtn.addEventListener('click', changeSpeed);*/
+        
+        // Pausar autoplay al pasar el mouse
+        slider.addEventListener('mouseenter', stopAutoPlay);
+        slider.addEventListener('mouseleave', () => {
+            if (autoPlay) {
+                startAutoPlay();
+            }
+        });
+        
+        // Inicializar el carrusel
+        startAutoPlay();
+        
+        // Cambiar textos cada 15 segundos para demostración
+        //setInterval(changeTexts, 15000);
+    </script>
+</body>
+</html>
